@@ -26,7 +26,7 @@ namespace IconCarousel
             Config = new ConfigModel
             {
                 IconPaths = new List<string>(config.IconPaths),
-                IntervalSeconds = config.IntervalSeconds,
+                IntervalMilliseconds = config.IntervalMilliseconds,
                 AutoStart = config.AutoStart
             };
             
@@ -92,7 +92,7 @@ namespace IconCarousel
 
             var intervalLabel = new Label
             {
-                Text = "切换间隔（秒）：",
+                Text = "切换间隔（毫秒）：",
                 Location = new Point(12, 210),
                 Size = new Size(120, 23),
                 AutoSize = true
@@ -102,9 +102,9 @@ namespace IconCarousel
             {
                 Location = new Point(140, 207),
                 Size = new Size(80, 23),
-                Minimum = 1,
-                Maximum = 3600,
-                Value = 3
+                Minimum = 50,
+                Maximum = 3600000,
+                Value = 3000
             };
 
             _autoStartCheckBox = new CheckBox
@@ -159,7 +159,7 @@ namespace IconCarousel
                 _iconListBox.Items.Add(Path.GetFileName(iconPath) + " - " + iconPath);
             }
 
-            _intervalNumeric.Value = Config.IntervalSeconds;
+            _intervalNumeric.Value = Config.IntervalMilliseconds;
             _autoStartCheckBox.Checked = Config.AutoStart;
         }
 
@@ -242,7 +242,7 @@ namespace IconCarousel
 
         private void OkButton_Click(object? sender, EventArgs e)
         {
-            Config.IntervalSeconds = (int)_intervalNumeric.Value;
+            Config.IntervalMilliseconds = (int)_intervalNumeric.Value;
             Config.AutoStart = _autoStartCheckBox.Checked;
         }
     }

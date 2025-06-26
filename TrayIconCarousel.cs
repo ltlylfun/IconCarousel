@@ -117,7 +117,7 @@ namespace IconCarousel
             if (_iconPaths.Count > 0)
             {
                 SetCurrentIcon();
-                _carouselTimer.Interval = _config.IntervalSeconds * 1000;
+                _carouselTimer.Interval = _config.IntervalMilliseconds;
                 
                 if (_config.AutoStart)
                 {
